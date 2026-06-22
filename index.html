@@ -325,13 +325,13 @@ Pedestrian Behavior Models",
                 Social navigation benchmarks evaluate robot policies but leave the pedestrian behavior model as an
                 uncontrolled axis of evaluation, conflating claims about policies with claims about the human models
                 used to evaluate them.
-                We introduce \WORKNAME (Pedestrian Evaluation Dataset \& Simulator), a modular human simulator that
+                We introduce PEDS (Pedestrian Evaluation Dataset & Simulator), a modular human simulator that
                 treats the pedestrian driver as the unit of variation.
                 A deterministic executor synchronizes the driver and the robot policy so that, at fixed seed, driver
                 substitution is the only source of trial-to-trial variation.
-                The release comprises six pedestrian drivers across four model classes: force-based (\SFM, \HSFM),
-                velocity-based (\ORCA), a no-avoidance baseline (\Straight), and imitation-learned (\NSP, \SocialGAIL).
-                The accompanying dataset spans 20 pedestrian-driver scenarios on a load\,$\times$\,density grid, crossed
+                The release comprises six pedestrian drivers across four model classes: force-based (SFM, HSFM),
+                velocity-based (ORCA), a no-avoidance baseline (Straight), and imitation-learned (NSP, SocialGAIL).
+                The accompanying dataset spans 20 pedestrian-driver scenarios on a load\(\times\)density grid, crossed
                 with four robot policies in closed loop.
                 Within-policy success varies by up to 18 percentage points across pedestrian drivers, and cross-class
                 trajectory divergence averages 1.4$\times$ and peaks above 2$\times$ on dense locomotion.
@@ -358,11 +358,14 @@ Pedestrian Behavior Models",
             </div>
           </div>
 
-          <div class="box has-text-centered p-5 mb-6 pipeline-box">
-            <figure class="image is-inline-block">
-              <img src="static/images/system.png" alt="PEDS Benchmarking System"
-                style="border-radius: 6px; max-width: 80%;">
-            </figure>
+          <div class="box p-5 mb-6 pipeline-box">
+            <div class="is-flex is-justify-content-center">
+              <figure class="image" style="max-width: 80%; width: 100%;">
+                <img src="static/images/system.png" alt="PEDS Benchmarking System"
+                  style="border-radius: 6px; display: block; margin: 0 auto;">
+              </figure>
+            </div>
+
             <div class="pipeline-caption has-text-left mt-3">
               <p class="is-size-6 text-muted">
                 <strong>System Overview.</strong>
@@ -379,85 +382,104 @@ Pedestrian Behavior Models",
     <section class="hero is-small is-light">
       <div class="hero-body">
         <div class="container">
-          <h2 class="title is-3 pt-6">Driver-class behavioral divergence</span></h2>
-          <!-- <p class="is-size-5 mb-2">Spatial understanding capabilities emerge in a depth image encoder pretrained on
-            latent
-            action extraction from non-robot synthetic depth images.</p> -->
-          <div class="container video-grid">
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Peds only/bt_coverage_hsfm.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">HSFM</span></p>
-            </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Peds only/bt_coverage_orca.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">ORCA</span></p>
-            </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Peds only/bt_coverage_socialgail.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">SocialGAIL</span></p>
+          <h2 class="title is-3 pt-6">Driver-class behavioral divergence</h2>
+
+          <div id="driver-divergence-carousel" class="carousel results-carousel">
+
+            <div class="item p-4">
+              <h3 class="subtitle has-text-centered is-4">Scenario: BT Coverage</h3>
+              <div class="columns is-centered">
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Peds only/bt_coverage_hsfm.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>HSFM</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Peds only/bt_coverage_orca.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>ORCA</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Peds only/bt_coverage_socialgail.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
+                </div>
+              </div>
             </div>
 
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Peds only/escort_hsfm.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">HSFM</span></p>
-            </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Peds only/escort_orca.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">ORCA</span></p>
-            </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Peds only/escort_socialgail.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">SocialGAIL</span></p>
-            </div>
-
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Peds only/queue_hsfm.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">HSFM</span></p>
-            </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Peds only/queue_orca.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">ORCA</span></p>
-            </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Peds only/queue_socialgail.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">SocialGAIL</span></p>
+            <div class="item p-4">
+              <h3 class="subtitle has-text-centered is-4">Scenario: Escort</h3>
+              <div class="columns is-centered">
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Peds only/escort_hsfm.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>HSFM</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Peds only/escort_orca.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>ORCA</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Peds only/escort_socialgail.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
+                </div>
+              </div>
             </div>
 
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Peds only/flow_coverage_hsfm.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">HSFM</span></p>
+            <div class="item p-4">
+              <h3 class="subtitle has-text-centered is-4">Scenario: Queue</h3>
+              <div class="columns is-centered">
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Peds only/queue_hsfm.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>HSFM</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Peds only/queue_orca.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>ORCA</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Peds only/queue_socialgail.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
+                </div>
+              </div>
             </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Peds only/flow_coverage_orca.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">ORCA</span></p>
-            </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Peds only/flow_coverage_socialgail.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">SocialGAIL</span></p>
+
+            <div class="item p-4">
+              <h3 class="subtitle has-text-centered is-4">Scenario: Flow Coverage</h3>
+              <div class="columns is-centered">
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Peds only/flow_coverage_hsfm.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>HSFM</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Peds only/flow_coverage_orca.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>ORCA</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Peds only/flow_coverage_socialgail.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -467,94 +489,175 @@ Pedestrian Behavior Models",
     <section class="hero is-small">
       <div class="hero-body">
         <div class="container is-centered">
-          <h2 class="title is-3 pt-6">Robot Policies Benchmark</span></h2>
-          <div class="container video-grid">
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Robots/robot_bt_coverage_hsfm_cadrl.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">HSFM</span></p>
-            </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Robots/robot_bt_coverage_orca_cadrl.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">ORCA</span></p>
-            </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Robots/robot_bt_coverage_socialgail_cadrl.mp4"
-                  type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">SocialGAIL</span></p>
+          <h2 class="title is-3 pt-6">Robot Policies Benchmark</h2>
+
+          <div id="robot-policies-carousel" class="carousel results-carousel">
+
+            <div class="item p-4">
+              <h3 class="subtitle has-text-centered is-4">Scenario: BT Coverage (CADRL)</h3>
+              <div class="columns is-centered">
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Robots/robot_bt_coverage_hsfm_cadrl.mp4"
+                      type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>HSFM</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Robots/robot_bt_coverage_orca_cadrl.mp4"
+                      type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>ORCA</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Robots/robot_bt_coverage_socialgail_cadrl.mp4"
+                      type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
+                </div>
+              </div>
             </div>
 
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Robots/robot_escort_hsfm_cadrl.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">HSFM</span></p>
-            </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Robots/robot_escort_orca_cadrl.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">ORCA</span></p>
-            </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Robots/robot_escort_socialgail_cadrl.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">SocialGAIL</span></p>
-            </div>
-
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Robots/robot_l_corridor_hsfm_cadrl.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">HSFM</span></p>
-            </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Robots/robot_l_corridor_orca_cadrl.mp4" type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">ORCA</span></p>
-            </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Robots/robot_l_corridor_socialgail_cadrl.mp4"
-                  type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">SocialGAIL</span></p>
+            <div class="item p-4">
+              <h3 class="subtitle has-text-centered is-4">Scenario: Escort (CADRL)</h3>
+              <div class="columns is-centered">
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Robots/robot_escort_hsfm_cadrl.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>HSFM</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Robots/robot_escort_orca_cadrl.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>ORCA</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Robots/robot_escort_socialgail_cadrl.mp4"
+                      type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
+                </div>
+              </div>
             </div>
 
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Robots/robot_simple_crossing_hsfm_cadrl.mp4"
-                  type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">HSFM</span></p>
+            <div class="item p-4">
+              <h3 class="subtitle has-text-centered is-4">Scenario: L-Corridor (CADRL)</h3>
+              <div class="columns is-centered">
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Robots/robot_l_corridor_hsfm_cadrl.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>HSFM</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Robots/robot_l_corridor_orca_cadrl.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>ORCA</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Robots/robot_l_corridor_socialgail_cadrl.mp4"
+                      type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
+                </div>
+              </div>
             </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Robots/robot_simple_crossing_orca_cadrl.mp4"
-                  type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">ORCA</span></p>
-            </div>
-            <div class="video-item">
-              <video preload="none" autoplay controls muted loop playbackRate="2.0">
-                <source src="static/videos/Native recorder/Robots/robot_simple_crossing_socialgail_cadrl.mp4"
-                  type="video/mp4">
-              </video>
-              <p class="video-caption"><span class="dnerf">SocialGAIL</span></p>
+
+            <div class="item p-4">
+              <h3 class="subtitle has-text-centered is-4">Scenario: Simple Crossing (CADRL)</h3>
+              <div class="columns is-centered">
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Robots/robot_simple_crossing_hsfm_cadrl.mp4"
+                      type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>HSFM</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Robots/robot_simple_crossing_orca_cadrl.mp4"
+                      type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>ORCA</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/Native recorder/Robots/robot_simple_crossing_socialgail_cadrl.mp4"
+                      type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <section class="hero is-small is-light">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title is-3 pt-6">Compatibility with External Simulators</h2>
+          <div id="robot-policies-carousel" class="carousel results-carousel">
 
+            <div class="item p-4">
+              <h3 class="subtitle has-text-centered is-4"></h3>
+              <div class="columns is-centered">
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/rviz_queue_and_group_conv.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>RViz2</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/gazebo_queue_and_group_conv.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>Gazebo</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/isaac_queue_and_group_conv.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>IsaacSim</strong></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="item p-4">
+              <h3 class="subtitle has-text-centered is-4"></h3>
+              <div class="columns is-centered">
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/rviz_airport.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>RViz2</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/gazebo_airport.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>Gazebo</strong></p>
+                </div>
+                <div class="column">
+                  <video preload="none" autoplay controls muted loop>
+                    <source src="static/videos/isaac_airport.mp4" type="video/mp4">
+                  </video>
+                  <p class="has-text-centered"><strong>IsaacSim</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <!--BibTex citation -->
     <!-- <section class="section" id="BibTeX">
       <div class="container is-max-desktop content">
