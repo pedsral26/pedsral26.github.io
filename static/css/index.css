@@ -262,12 +262,16 @@ body {
   margin: 1rem;
   overflow: hidden;
   padding: 1.5rem;
-  font-size: 0;
   background: var(--background-primary);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
   transition: var(--transition);
   border: 1px solid var(--border-color);
+}
+
+.results-carousel .item p,
+.results-carousel .item .has-text-centered {
+  font-size: 1rem;
 }
 
 .results-carousel .item:hover {
@@ -861,14 +865,30 @@ video {
   border-radius: 16px 16px 0 0;
 }
 
-/* Discrete */
-.method-card.discrete::after {
+/* Classical Force-based */
+.method-card.classical-force-based::after {
   background: linear-gradient(90deg, #6366f1, #8b5cf6);
 }
 
-/* Continuous */
-.method-card.continuous::after {
+/* Velocity-obstacle */
+.method-card.velocity-obstacle::after {
+  background: linear-gradient(90deg, #a7c522, #f2df13 );
+}
+
+/* Imitation Learning */
+.method-card.imitation-learning::after {
   background: linear-gradient(90deg, #10b981, #22c55e);
+}
+
+
+/* Driver family responsive layout */
+.driver-family-row {
+  flex-wrap: wrap;
+}
+
+.driver-family-row > .column {
+  min-width: 240px;
+  flex: 1 1 280px;
 }
 
 .method-list li {

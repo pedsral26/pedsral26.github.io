@@ -250,7 +250,7 @@ Pedestrian Behavior Models",
 
                   <!-- TODO: Add your supplementary material PDF or remove this section -->
                   <span class="link-block">
-                    <a href="static/pdfs/sample.pdf" target="_blank"
+                    <a href="https://huggingface.co/datasets/neuripsqafyncakomkin/PEDS-37" target="_blank"
                       class="external-link button is-normal is-rounded is-dark">
                       <span class="icon">
                         <i class="fas fa-file-pdf"></i>
@@ -321,7 +321,7 @@ Pedestrian Behavior Models",
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified">
               <!-- TODO: Replace with your paper abstract -->
-              <p>
+              <p class="is-size-5 has-text-justified">
                 Social navigation benchmarks evaluate robot policies but leave the pedestrian behavior model as an
                 uncontrolled axis of evaluation, conflating claims about policies with claims about the human models
                 used to evaluate them.
@@ -352,10 +352,22 @@ Pedestrian Behavior Models",
           <div class="columns is-centered has-text-centered">
             <div class="column is-four-fifths">
               <div class="publication-video">
-                <iframe src="https://www.youtube.com/embed/o8aDuvsscKU" frameborder="0"
+                <iframe src="https://www.youtube.com/embed/o8aDuvsscKU?si=X-uWxqHjrTPekklY" frameborder="0"
                   allow="autoplay; encrypted-media" allowfullscreen></iframe>
               </div>
             </div>
+          </div>
+
+          <div class="content has-text-justified">
+            <p>
+              Social navigation research typically compares robot navigation
+              policies under a single pedestrian simulator.
+              While this practice simplifies benchmarking, it also makes the
+              evaluation inseparable from the underlying pedestrian model.
+              Two navigation policies may appear better or worse simply because
+              they are tested with different crowd dynamics.
+            </p>
+
           </div>
 
           <div class="box p-5 mb-6 pipeline-box">
@@ -375,6 +387,19 @@ Pedestrian Behavior Models",
               </p>
             </div>
           </div>
+
+          <div class="pipeline-caption has-text-left mt-4">
+
+            <p class="is-size-5 text-justified">
+              PEDS separates pedestrian behavior, scenario logic, and robot navigation
+              into independent components.
+              Pedestrian drivers can therefore be exchanged without modifying the
+              simulation infrastructure or the robot controller.
+              This modular design makes it possible to evaluate the exact influence
+              of pedestrian behavior on downstream navigation performance.
+            </p>
+
+          </div>
         </div>
       </div>
     </section>
@@ -383,6 +408,49 @@ Pedestrian Behavior Models",
       <div class="hero-body">
         <div class="container">
           <h2 class="title is-3 pt-6">Driver-class behavioral divergence</h2>
+          <div class="content is-size-5">
+            <p>
+              PEDS includes six reference pedestrian drivers representing
+              multiple modeling paradigms.
+              These range from classical force-based and velocity-obstacle
+              methods to modern imitation-learning approaches.
+              Every driver operates under the same scenario description and
+              shares identical initial conditions, allowing differences in
+              crowd behavior to be attributed solely to the pedestrian model.
+            </p>
+          </div>
+
+          <!-- Family -->
+          <div class="columns driver-family-row">
+            <div class="column is-4">
+              <div class="method-card classical-force-based">
+                <h4 class="title is-5 has-text-link">Classical Force-based</h4>
+                <div class="model-list buttons field is-grouped mb-4">
+                  <button class="is-small is-link m-1 model-item model-btn" data-model="model1">SFM</button>
+                  <button class="is-small is-link m-1 model-item model-btn" data-model="model2">HSFM</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-4">
+              <div class="method-card velocity-obstacle">
+                <h4 class="title is-5" style="color: #d5c400;">Velocity-obstacle</h4>
+                <div class="model-list buttons field is-grouped mb-4">
+                  <button class="is-small is-link m-1 model-item model-btn" data-model="model1">ORCA</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-4">
+              <div class="method-card imitation-learning">
+                <h4 class="title is-5" style="color: #48c774;">Imitation Learning</h4>
+                <div class="model-list buttons field is-grouped mb-4">
+                  <button class="is-small is-link m-1 model-item model-btn" data-model="model4">NSP</button>
+                  <button class="is-small is-link m-1 model-item model-btn" data-model="model5">SocialGAIL</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div id="driver-divergence-carousel" class="carousel results-carousel">
 
@@ -482,6 +550,15 @@ Pedestrian Behavior Models",
               </div>
             </div>
           </div>
+          <div class="content is-size-5">
+            <p>
+              The videos below illustrate how the same scenario evolves when
+              only the pedestrian driver changes.
+              Although each crowd pursues identical navigation goals,
+              their local interactions, collision avoidance strategies,
+              and collective motion differ noticeably across driver classes.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -490,6 +567,14 @@ Pedestrian Behavior Models",
       <div class="hero-body">
         <div class="container is-centered">
           <h2 class="title is-3 pt-6">Robot Policies Benchmark</h2>
+          <div class="content has-text-justified">
+            <p class="mb-5 is-size-5">
+              Unlike traditional benchmarks, PEDS evaluates every robot policy across
+              multiple pedestrian drivers rather than a single crowd model.
+              This protocol reveals whether a navigation policy remains reliable under
+              different assumptions about human behavior.
+            </p>
+          </div>
 
           <div id="robot-policies-carousel" class="carousel results-carousel">
 
@@ -596,6 +681,14 @@ Pedestrian Behavior Models",
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="content has-text-justified">
+            <p class="mb-5 is-size-5">
+              In many scenarios, the same robot exhibits noticeably different success
+              rates, collision statistics, and social compliance depending solely on
+              the pedestrian driver generating the surrounding crowd.
+            </p>
           </div>
         </div>
       </div>
