@@ -4,805 +4,660 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PEDS: Closed-Loop Benchmarking of Social Navigation across Pedestrian Behavior Models</title>
+  <meta name="description"
+    content="PEDS is a modular ROS 2 human simulator that treats the pedestrian driver as the unit of variation, showing that social-navigation policy rankings change with the pedestrian model.">
+  <meta name="keywords"
+    content="social navigation, crowd simulation, pedestrian behavior models, benchmarking, ROS 2, robot navigation">
+  <meta name="theme-color" content="#071112">
 
-  <!-- Primary Meta Tags -->
-  <!-- TODO: Replace with your paper title and author names -->
-  <meta name="title" content="PEDS: Closed-Loop Benchmarking of Social Navigation across
-Pedestrian Behavior Models - Anonymous Author(s)">
-  <!-- TODO: Write a compelling 150-160 character description of your research -->
-  <meta name="description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Add 5-10 relevant keywords for your research area -->
-  <meta name="keywords" content="Robot Learning, Depth Perception, Latent Action Representations">
-  <!-- TODO: List all authors -->
-  <meta name="author" content="FIRST_AUTHOR_NAME, SECOND_AUTHOR_NAME">
-  <meta name="robots" content="index, follow">
-  <meta name="language" content="English">
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="article">
-  <!-- TODO: Replace with your institution or lab name -->
-  <meta property="og:site_name" content="INSTITUTION_OR_LAB_NAME">
-  <!-- TODO: Same as paper title above -->
-  <meta property="og:title" content="PEDS: Closed-Loop Benchmarking of Social Navigation across
-Pedestrian Behavior Models">
-  <!-- TODO: Same as description above -->
-  <meta property="og:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Replace with your actual website URL -->
-  <meta property="og:url" content="https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE">
-  <!-- TODO: Create a 1200x630px preview image and update path -->
-  <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="PEDS: Closed-Loop Benchmarking of Social Navigation across
-Pedestrian Behavior Models - Research Preview">
-  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
-  <meta property="article:author" content="FIRST_AUTHOR_NAME">
-  <meta property="article:section" content="Research">
-  <meta property="article:tag" content="KEYWORD1">
-  <meta property="article:tag" content="KEYWORD2">
-
-  <!-- Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PEDS: Closed-Loop Benchmarking of Social Navigation across Pedestrian Behavior Models">
+  <meta property="og:description"
+    content="A modular human simulator that makes the pedestrian behavior model a controlled axis of evaluation for social navigation.">
+  <meta property="og:url" content="https://pedsral26.github.io/">
+  <meta property="og:image" content="https://pedsral26.github.io/static/images/teaser-web.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <!-- TODO: Replace with your lab/institution Twitter handle -->
-  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
-  <!-- TODO: Replace with first author's Twitter handle -->
-  <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE">
-  <!-- TODO: Same as paper title above -->
-  <meta name="twitter:title" content="PEDS: Closed-Loop Benchmarking of Social Navigation across
-Pedestrian Behavior Models">
-  <!-- TODO: Same as description above -->
-  <meta name="twitter:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Same as social preview image above -->
-  <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
-  <meta name="twitter:image:alt" content="PEDS: Closed-Loop Benchmarking of Social Navigation across
-Pedestrian Behavior Models - Research Preview">
 
-  <!-- Academic/Research Specific -->
-  <meta name="citation_title" content="PEDS: Closed-Loop Benchmarking of Social Navigation across
-Pedestrian Behavior Models">
-  <meta name="citation_author" content="FIRST_AUTHOR_LAST, FIRST_AUTHOR_FIRST">
-  <meta name="citation_author" content="SECOND_AUTHOR_LAST, SECOND_AUTHOR_FIRST">
-  <meta name="citation_publication_date" content="2024">
-  <meta name="citation_conference_title" content="CONFERENCE_NAME">
-  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
-
-  <!-- Additional SEO -->
-  <meta name="theme-color" content="#2563eb">
-  <meta name="msapplication-TileColor" content="#2563eb">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-
-  <!-- Preconnect for performance -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://ajax.googleapis.com">
-  <link rel="preconnect" href="https://documentcloud.adobe.com">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-
-
-  <!-- TODO: Replace with your paper title and authors -->
-  <title>PEDS: Closed-Loop Benchmarking of Social Navigation across
-    Pedestrian Behavior Models - Anonymous
-    Author(s) | Affiliation</title>
-
-  <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico">
-
-  <!-- Critical CSS - Load synchronously -->
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
-
-  <!-- Non-critical CSS - Load asynchronously -->
-  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style"
-    onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style"
-    onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style"
-    onload="this.onload=null;this.rel='stylesheet'">
-
-  <!-- Fallback for browsers that don't support preload -->
-  <noscript>
-    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  </noscript>
-
-  <!-- Fonts - Optimized loading -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Defer non-critical JavaScript -->
-  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script defer src="static/js/bulma-carousel.min.js"></script>
-  <script defer src="static/js/bulma-slider.min.js"></script>
-  <script defer src="static/js/index.js"></script>
-
-  <!-- Structured Data for Academic Papers -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ScholarlyArticle",
-    "headline": "PEDS: Closed-Loop Benchmarking of Social Navigation across
-Pedestrian Behavior Models",
-    "description": "BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS",
-    "author": [
-      {
-        "@type": "Person",
-        "name": "FIRST_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      },
-      {
-        "@type": "Person",
-        "name": "SECOND_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      }
-    ],
-    "datePublished": "2024-01-01",
-    "publisher": {
-      "@type": "Organization",
-      "name": "CONFERENCE_OR_JOURNAL_NAME"
-    },
-    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
-    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
-    "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
-    "abstract": "FULL_ABSTRACT_TEXT_HERE",
-    "citation": "BIBTEX_CITATION_HERE",
-    "isAccessibleForFree": true,
-    "license": "https://creativecommons.org/licenses/by/4.0/",
-    "mainEntity": {
-      "@type": "WebPage",
-      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
-    },
-    "about": [
-      {
-        "@type": "Thing",
-        "name": "RESEARCH_AREA_1"
-      },
-      {
-        "@type": "Thing", 
-        "name": "RESEARCH_AREA_2"
-      }
-    ]
-  }
-  </script>
-
-  <!-- Website/Organization Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "INSTITUTION_OR_LAB_NAME",
-    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
-    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
-    "sameAs": [
-      "https://twitter.com/YOUR_TWITTER_HANDLE",
-      "https://github.com/YOUR_GITHUB_USERNAME"
-    ]
-  }
-  </script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="static/css/style.css">
   <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],  // 👈 enable $...$
-        displayMath: [['$$', '$$'], ['\\[', '\\]']]
-      }
-    };
+    try { const t = localStorage.getItem('peds-theme'); if (t) document.documentElement.dataset.theme = t; } catch (_) { }
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-    </script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="static/js/main.js"></script>
 </head>
 
 <body>
 
+  <!-- ============================== NAV ============================== -->
+  <nav class="topnav" aria-label="Sections">
+    <div class="wrap">
+      <a class="brand" href="#top">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="var(--accent)" />
+          <circle cx="10" cy="11" r="2.6" fill="#fff" />
+          <circle cx="10" cy="21" r="2.6" fill="#fff" opacity=".7" />
+          <circle cx="16" cy="16" r="2.6" fill="#fff" opacity=".85" />
+          <path d="M19.5 16h6m-2.5-3 3 3-3 3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        PEDS
+      </a>
+      <div class="navlinks">
+        <a href="#overview">Overview</a>
+        <a href="#abstract">Abstract</a>
+        <a href="#video">Demo video</a>
+        <a href="#system">System</a>
+        <a href="#drivers">Drivers</a>
+        <a href="#benchmark">Benchmark</a>
+        <a href="#simulators">Simulators</a>
+        <a href="#citation">Cite</a>
+      </div>
+      <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+        </svg>
+      </button>
+    </div>
+  </nav>
 
-  <!-- Scroll to Top Button -->
-  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fas fa-chevron-up"></i>
-  </button>
+  <!-- ============================== HERO ============================== -->
+  <header class="hero" id="top">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <source src="static/videos/isaac_airport.mp4" type="video/mp4">
+    </video>
+    <div class="hero-shade"></div>
+    <div class="wrap hero-inner">
+      <p class="badge">Accepted to <b>IEEE RA-L 2026</b></p>
+      <h1><span class="name">PEDS</span>: Closed-Loop Benchmarking of Social Navigation across Pedestrian Behavior
+        Models</h1>
+      <!-- TODO: de-anonymize authors and affiliations -->
+      <p class="authors">
+        <span>Anonymous Author(s)</span>
+      </p>
+      <p class="affil">Affiliation</p>
+      <nav class="hero-links" aria-label="Paper links">
+        <!-- TODO: add the paper link once it is public
+        <a class="btn primary" href="https://arxiv.org/abs/XXXX.XXXXX" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z M14 3v5h5" /></svg>Paper</a>
+        -->
+        <a class="btn primary" href="https://anonymous.4open.science/r/peds-review-9EDB" rel="noopener"><svg
+            viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m9 18-6-6 6-6M15 6l6 6-6 6" />
+          </svg>Code</a>
+        <a class="btn" href="https://huggingface.co/datasets/neuripsqafyncakomkin/PEDS-37" rel="noopener"><svg
+            viewBox="0 0 24 24" aria-hidden="true">
+            <ellipse cx="12" cy="5" rx="8" ry="3" />
+            <path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" />
+          </svg>Dataset</a>
+        <a class="btn" href="#video"><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 5v14l11-7z" />
+          </svg>Video</a>
+        <a class="btn" href="#citation"><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 7h4v4H8v6H4v-6zM16 7h4v4h-3v6h-4v-6z" />
+          </svg>BibTeX</a>
+      </nav>
+    </div>
+    <span class="hero-tag">PEDS crowd · Isaac Sim airport</span>
+    <a class="scroll-cue" href="#overview" aria-label="Scroll to overview"><span></span></a>
+  </header>
 
-  <main id="main-content">
-    <section class="hero">
-      <div class="hero-body">
-        <div class="container is-max-desktop">
-          <div class="columns is-centered">
-            <div class="column has-text-centered">
-              <!-- TODO: Replace with your paper title -->
-              <h1 class="title is-1 publication-title">PEDS: Closed-Loop Benchmarking of Social Navigation across
-                Pedestrian Behavior Models</h1>
-              <div class="is-size-5 publication-authors">
-                <!-- TODO: Replace with your paper authors and their personal links -->
-                <span class="author-block">
-                  <a href="" target="_blank">Anonymous Author(s)</a>
-                </span>
-              </div>
-
-              <div class="is-size-5 publication-authors">
-                <!-- TODO: Replace with your institution and conference/journal info -->
-                <span class="author-block">Affiliation<br>Adress</span>
-                <!-- TODO: Remove this line if no equal contribution -->
-                <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
-              </div>
-
-              <div class="column has-text-centered">
-                <div class="publication-links">
-                  <!-- TODO: Update with your arXiv paper ID -->
-                  <!-- <span class="link-block">
-                    <a href="/static/pdfs/sample.pdf" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>Paper</span>
-                    </a>
-                  </span> -->
-
-                  <!-- TODO: Add your supplementary material PDF or remove this section -->
-                  <span class="link-block">
-                    <a href="https://huggingface.co/datasets/neuripsqafyncakomkin/PEDS-37" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>Dataset</span>
-                    </a>
-                  </span>
-
-                  <!-- TODO: Replace with your GitHub repository URL -->
-                  <span class="link-block">
-                    <a href="https://anonymous.4open.science/r/peds-review-9EDB" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fab fa-github"></i>
-                      </span>
-                      <span>Code</span>
-                    </a>
-                  </span>
-
-                  <!-- TODO: Update with your arXiv paper ID -->
-                  <!-- <span class="link-block">
-                    <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="ai ai-arxiv"></i>
-                      </span>
-                      <span>arXiv</span>
-                    </a>
-                  </span> -->
-                </div>
-              </div>
-            </div>
+  <main>
+    <!-- ============================== OVERVIEW ============================== -->
+    <section class="section" id="overview">
+      <div class="wrap">
+        <div class="stats reveal">
+          <div class="stat">
+            <div class="stat-value">6</div>
+            <div class="stat-label">pedestrian drivers across four model classes</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">20</div>
+            <div class="stat-label">scenarios on a load × density grid, crossed with 4 robot policies</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value hl">18<small>pp</small></div>
+            <div class="stat-label">swing in within-policy success rate, from the driver alone</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">&gt;2<small>×</small></div>
+            <div class="stat-label">peak cross-class trajectory divergence (1.4× on average)</div>
           </div>
         </div>
+
+        <p class="tldr-lead reveal">
+          Social navigation benchmarks quietly fix one pedestrian model. PEDS makes it a variable, and
+          <mark>robot policy rankings reorder</mark> depending on which crowd model you test against.
+        </p>
+
+        <figure class="reveal" style="margin: 0;">
+          <div class="figure">
+            <img src="static/images/teaser-web.jpg" data-full="static/images/teaser.png"
+              alt="Rank chart of four robot policies across six pedestrian drivers, with example trajectories"
+              loading="lazy">
+          </div>
+          <figcaption class="figcap">
+            <span class="fig-num">FIG. 1</span>
+            <strong>The pedestrian driver is a primary axis of evaluation.</strong>
+            The same robot policy (CADRL, green and pink) stalls or reaches the goal depending on which driver shapes
+            the surrounding pedestrians (bottom), and per-driver policy ranks reorder across the six drivers on the
+            dense pure-navigation scenarios (top).
+          </figcaption>
+        </figure>
       </div>
     </section>
 
-
-    <!-- Teaser video-->
-    <section class="hero teaser">
-      <div class="container is-max-desktop">
-        <div class="hero-body">
-          <!-- TODO: Replace with your teaser video -->
-          <!-- <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata"> -->
-          <!-- TODO: Add your video file path here -->
-          <!-- <source src="static/videos/banner_video.mp4" type="video/mp4"> -->
-          <!-- </video> -->
-          <img src="static/images/teaser.png" alt="">
-          <!-- TODO: Replace with your video description -->
-          <h2 class="subtitle has-text-centered">
-            <strong>
-              PEDS treats the pedestrian driver as a primary axis of evaluation:
-            </strong>
-            The same robot policy (CADRL, green, pink) stalls or reaches the goal depending on which driver shapes the
-            surrounding pedestrians (left), and per-driver policy ranks reorder across the six drivers on the dense
-            pure-navigation scenarios.
-          </h2>
+    <!-- ============================== ABSTRACT ============================== -->
+    <section class="section section-tint" id="abstract">
+      <div class="wrap">
+        <div class="section-head stacked full reveal">
+          <p class="num">01 / Abstract</p>
+          <h2>Robot policy or pedestrian model? Separating the two.</h2>
         </div>
-      </div>
-    </section>
-    <!-- End teaser video -->
-
-    <!-- Paper abstract -->
-    <section class="section hero is-light" id="abstract">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-four-fifths">
-            <h2 class="title is-3">Abstract</h2>
-            <div class="content has-text-justified">
-              <!-- TODO: Replace with your paper abstract -->
-              <p class="is-size-5 has-text-justified">
-                Social navigation benchmarks evaluate robot policies but leave the pedestrian behavior model as an
-                uncontrolled axis of evaluation, conflating claims about policies with claims about the human models
-                used to evaluate them.
-                We introduce PEDS (Pedestrian Evaluation Dataset & Simulator), a modular human simulator that
-                treats the pedestrian driver as the unit of variation.
-                A deterministic executor synchronizes the driver and the robot policy so that, at fixed seed, driver
-                substitution is the only source of trial-to-trial variation.
-                The release comprises six pedestrian drivers across four model classes: force-based (SFM, HSFM),
-                velocity-based (ORCA), a no-avoidance baseline (Straight), and imitation-learned (NSP, SocialGAIL).
-                The accompanying dataset spans 20 pedestrian-driver scenarios on a load\(\times\)density grid, crossed
-                with four robot policies in closed loop.
-                Within-policy success varies by up to 18 percentage points across pedestrian drivers, and cross-class
-                trajectory divergence averages 1.4$\times$ and peaks above 2$\times$ on dense locomotion.
-                We release the dataset under CC BY 4.0 and the code under the Apache 2.0 License.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End paper abstract -->
-
-    <section class="hero is-small">
-      <div class="hero-body">
-        <div class="container">
-          <h2 class="title is-3 pt-6"> PEDS - A modular human simulator built on ROS 2</h2>
-          <!-- Paper video. -->
-          <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths">
-              <div class="publication-video">
-                <iframe src="https://www.youtube.com/embed/o8aDuvsscKU?si=X-uWxqHjrTPekklY" frameborder="0"
-                  allow="autoplay; encrypted-media" allowfullscreen></iframe>
-              </div>
-            </div>
-          </div>
-
-          <div class="content has-text-justified">
+        <div class="abstract-grid reveal">
+          <div class="abstract">
             <p>
-              Social navigation research typically compares robot navigation
-              policies under a single pedestrian simulator.
-              While this practice simplifies benchmarking, it also makes the
-              evaluation inseparable from the underlying pedestrian model.
-              Two navigation policies may appear better or worse simply because
-              they are tested with different crowd dynamics.
+              Social navigation benchmarks evaluate robot policies but leave the pedestrian behavior model as an
+              uncontrolled axis of evaluation, conflating claims about policies with claims about the human models
+              used to evaluate them. We introduce <strong>PEDS</strong> (Pedestrian Evaluation Dataset &amp;
+              Simulator), a modular human simulator that treats the pedestrian driver as the unit of variation. A
+              deterministic executor synchronizes the driver and the robot policy so that, at fixed seed, driver
+              substitution is the only source of trial-to-trial variation.
             </p>
-
-          </div>
-
-          <div class="box p-5 mb-6 pipeline-box">
-            <div class="is-flex is-justify-content-center">
-              <figure class="image" style="max-width: 80%; width: 100%;">
-                <img src="static/images/system.png" alt="PEDS Benchmarking System"
-                  style="border-radius: 6px; display: block; margin: 0 auto;">
-              </figure>
-            </div>
-
-            <div class="pipeline-caption has-text-left mt-3">
-              <p class="is-size-6 text-muted">
-                <strong>System Overview.</strong>
-                The two pedestrian-driver slots, the deterministic executor cycle that advances drivers and the robot
-                policy in lockstep, and the boundary that separates pedestrian infrastructure (released as plug-ins)
-                from robot policy evaluation (kinematic evaluation harness).
-              </p>
-            </div>
-          </div>
-
-          <div class="pipeline-caption has-text-left mt-4">
-
-            <p class="is-size-5 text-justified">
-              PEDS separates pedestrian behavior, scenario logic, and robot navigation
-              into independent components.
-              Pedestrian drivers can therefore be exchanged without modifying the
-              simulation infrastructure or the robot controller.
-              This modular design makes it possible to evaluate the exact influence
-              of pedestrian behavior on downstream navigation performance.
-            </p>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="hero is-small is-light">
-      <div class="hero-body">
-        <div class="container">
-          <h2 class="title is-3 pt-6">Driver-class behavioral divergence</h2>
-          <div class="content is-size-5">
             <p>
-              PEDS includes six reference pedestrian drivers representing
-              multiple modeling paradigms.
-              These range from classical force-based and velocity-obstacle
-              methods to modern imitation-learning approaches.
-              Every driver operates under the same scenario description and
-              shares identical initial conditions, allowing differences in
-              crowd behavior to be attributed solely to the pedestrian model.
+              The release comprises <strong>six pedestrian drivers across four model classes</strong>: force-based
+              (SFM, HSFM), velocity-based (ORCA), a no-avoidance baseline (Straight), and imitation-learned (NSP,
+              SocialGAIL). The accompanying dataset spans 20 pedestrian-driver scenarios on a load × density grid,
+              crossed with four robot policies in closed loop. Within-policy success varies by <strong>up to 18
+                percentage points</strong> across pedestrian drivers, and cross-class trajectory divergence averages
+              1.4× and peaks above 2× on dense locomotion. We release the dataset under CC BY 4.0 and the code under
+              the Apache 2.0 License.
             </p>
           </div>
+          <dl class="facts">
+            <div><dt>Pedestrian drivers</dt><dd>SFM · HSFM · ORCA · Straight · NSP · SocialGAIL</dd></div>
+            <div><dt>Robot policies</dt><dd>SARL · CADRL · DS-RNN · DRL-VO</dd></div>
+            <div><dt>Scenarios</dt><dd>20, load × density</dd></div>
+            <div><dt>Middleware</dt><dd>ROS 2</dd></div>
+            <div><dt>Dataset</dt><dd>CC BY 4.0</dd></div>
+            <div><dt>Code</dt><dd>Apache 2.0</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
 
-          <!-- Family -->
-          <div class="columns driver-family-row">
-            <div class="column is-4">
-              <div class="method-card classical-force-based">
-                <h4 class="title is-5 has-text-link">Classical Force-based</h4>
-                <div class="model-list buttons field is-grouped mb-4">
-                  <button class="is-small is-link m-1 model-item model-btn" data-model="model1">SFM</button>
-                  <button class="is-small is-link m-1 model-item model-btn" data-model="model2">HSFM</button>
-                </div>
-              </div>
-            </div>
+    <!-- ============================== VIDEO ============================== -->
+    <section class="section" id="video">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="num">02 / Demo video</p>
+          <h2>A modular human simulator built on ROS 2</h2>
+          <p class="section-intro">
+            Social navigation research typically compares robot policies under a single pedestrian simulator. That
+            makes evaluation inseparable from the crowd model: two policies may look better or worse simply because
+            they were tested against different crowd dynamics.
+          </p>
+        </div>
+        <div class="video-frame reveal">
+          <!-- src is set by main.js when scrolled into view so the muted autoplay starts where the reader is -->
+          <iframe data-src="https://www.youtube-nocookie.com/embed/o8aDuvsscKU?autoplay=1&mute=1&loop=1&playlist=o8aDuvsscKU&playsinline=1&rel=0"
+            title="PEDS overview video" allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
 
-            <div class="column is-4">
-              <div class="method-card velocity-obstacle">
-                <h4 class="title is-5" style="color: #d5c400;">Velocity-obstacle</h4>
-                <div class="model-list buttons field is-grouped mb-4">
-                  <button class="is-small is-link m-1 model-item model-btn" data-model="model1">ORCA</button>
-                </div>
-              </div>
-            </div>
+    <!-- ============================== SYSTEM ============================== -->
+    <section class="section section-tint" id="system">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="num">03 / System</p>
+          <h2>Swap the crowd, keep everything else fixed</h2>
+          <p class="section-intro">
+            PEDS separates pedestrian behavior, scenario logic, and robot navigation into independent components.
+            Drivers can be exchanged without touching the simulation infrastructure or the robot controller,
+            isolating the influence of pedestrian behavior on downstream navigation.
+          </p>
+        </div>
 
-            <div class="column is-4">
-              <div class="method-card imitation-learning">
-                <h4 class="title is-5" style="color: #48c774;">Imitation Learning</h4>
-                <div class="model-list buttons field is-grouped mb-4">
-                  <button class="is-small is-link m-1 model-item model-btn" data-model="model4">NSP</button>
-                  <button class="is-small is-link m-1 model-item model-btn" data-model="model5">SocialGAIL</button>
-                </div>
-              </div>
+        <div class="sysx reveal" id="sysx">
+          <div class="sysx-bar">
+            <div class="sysx-pair">
+              <span class="muted">Running</span>
+              <span class="pair-chip c-ped" data-pair="driver">HSFM</span>
+              <span class="muted">×</span>
+              <span class="pair-chip c-robot" data-pair="policy">CADRL</span>
+              <span class="muted sysx-hint">pick any driver or policy below, and nothing else changes</span>
             </div>
+            <button class="sysx-play" type="button" aria-pressed="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+              <span>Play executor cycle</span>
+            </button>
           </div>
 
-          <div id="driver-divergence-carousel" class="carousel results-carousel">
+          <div class="sysx-body">
+            <div class="sysx-diagram">
+              <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+                <defs>
+                  <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="var(--l-ped)" /></marker>
+                  <marker id="arrB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="var(--l-robot)" /></marker>
+                </defs>
+              </svg>
+              <div class="layer l-ped">
+                <div class="layer-name">Pedestrian infrastructure</div>
+                <div class="ped-grid">
+                  <div class="mod" data-id="perception" style="grid-area: perc">
+                    <span class="mod-t">Perception Resolver</span>
+                    <span class="subs"><span>KD-tree lookup</span><span>FOV filtering</span></span>
+                  </div>
+                  <div class="mod" data-id="bt" style="grid-area: bt">
+                    <span class="mod-t">Need-driven Behavior Trees</span>
+                    <svg class="mod-art bt-art" viewBox="0 0 220 120" aria-label="Behavior tree: if thirsty, queue for and use the fountain; otherwise go to a gathering area and join a group conversation">
+                      <circle cx="16" cy="22" r="7" class="a-start" />
+                      <path d="M23 22h48" class="a-edge" marker-end="url(#arr)" />
+                      <path d="M110 4 140 22 110 40 80 22z" class="a-dec" />
+                      <text x="110" y="25.5" class="a-t a-t-dark">Thirsty?</text>
+                      <path d="M92 33 54 33 54 58" class="a-edge" marker-end="url(#arr)" />
+                      <text x="70" y="47" class="a-s">yes</text>
+                      <path d="M128 33 166 33 166 58" class="a-edge" marker-end="url(#arr)" />
+                      <text x="150" y="47" class="a-s">no</text>
+                      <rect x="16" y="62" width="76" height="22" rx="5" class="a-act" />
+                      <text x="54" y="76.5" class="a-t">Queue</text>
+                      <rect x="128" y="62" width="76" height="22" rx="5" class="a-act" />
+                      <text x="166" y="76.5" class="a-t">Gather</text>
+                      <path d="M54 84v10" class="a-edge" marker-end="url(#arr)" />
+                      <path d="M166 84v10" class="a-edge" marker-end="url(#arr)" />
+                      <rect x="16" y="96" width="76" height="22" rx="5" class="a-act" />
+                      <text x="54" y="110.5" class="a-t">Use fountain</text>
+                      <rect x="128" y="96" width="76" height="22" rx="5" class="a-act" />
+                      <text x="166" y="110.5" class="a-t">Converse</text>
+                    </svg>
+                  </div>
+                  <div class="mod" data-id="interaction" style="grid-area: inter">
+                    <span class="mod-t">Interaction Manager</span>
+                    <span class="subs"><span>Lookup / routing</span><span>Contracts</span></span>
+                  </div>
+                  <div class="mod" data-id="pathfinding" style="grid-area: path">
+                    <span class="mod-t">Global Pathfinding</span>
+                    <span class="subs"><span>Dijkstra</span><span>A*</span></span>
+                    <svg class="mod-art" viewBox="0 0 194 58" aria-hidden="true">
+                      <rect x="1" y="1" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="1" y="15" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="1" y="29" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="1" y="43" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="17" y="1" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="17" y="15" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="17" y="29" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="17" y="43" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="33" y="1" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="33" y="15" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="33" y="29" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="33" y="43" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="49" y="1" width="14" height="12" rx="2" class="g-obs" />
+                      <rect x="49" y="15" width="14" height="12" rx="2" class="g-obs" />
+                      <rect x="49" y="29" width="14" height="12" rx="2" class="g-obs" />
+                      <rect x="49" y="43" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="65" y="1" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="65" y="15" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="65" y="29" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="65" y="43" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="81" y="1" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="81" y="15" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="81" y="29" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="81" y="43" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="97" y="1" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="97" y="15" width="14" height="12" rx="2" class="g-obs" />
+                      <rect x="97" y="29" width="14" height="12" rx="2" class="g-obs" />
+                      <rect x="97" y="43" width="14" height="12" rx="2" class="g-obs" />
+                      <rect x="113" y="1" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="113" y="15" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="113" y="29" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="113" y="43" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="129" y="1" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="129" y="15" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="129" y="29" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="129" y="43" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="145" y="1" width="14" height="12" rx="2" class="g-obs" />
+                      <rect x="145" y="15" width="14" height="12" rx="2" class="g-obs" />
+                      <rect x="145" y="29" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="145" y="43" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="161" y="1" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="161" y="15" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="161" y="29" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="161" y="43" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="177" y="1" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="177" y="15" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="177" y="29" width="14" height="12" rx="2" class="g-cell" />
+                      <rect x="177" y="43" width="14" height="12" rx="2" class="g-cell" />
+                      <path d="M9 7 L41 7 L41 49 L89 49 L89 7 L137 7 L137 35 L185 35" class="g-path" />
+                      <circle cx="9" cy="7" r="4" class="g-start" />
+                      <circle cx="185" cy="35" r="4" class="g-goal" />
+                    </svg>
+                  </div>
+                  <div class="mod" data-id="animation" style="grid-area: anim">
+                    <span class="mod-t">Animation Generator</span>
+                    <span class="subs"><span>Kinematic</span><span>Dummy</span></span>
+                  </div>
+                  <div class="mod" data-id="recording" style="grid-area: rec">
+                    <span class="mod-t">Recording / Visualization</span>
+                    <svg class="mod-art rec-art" viewBox="0 0 200 52" aria-hidden="true">
+                      <path d="M4 40C40 38 60 14 100 18s70 22 96 6" class="tr tr1" />
+                      <path d="M4 12C46 16 70 40 110 36s60-20 86-24" class="tr tr2" />
+                      <path d="M4 26C50 26 80 30 120 26s54 4 76 2" class="tr tr3" />
+                      <circle cx="188" cy="10" r="4" class="rec-dot" />
+                    </svg>
+                  </div>
+                  <div class="mod mod-slot" data-id="driver" style="grid-area: lca">
+                    <span class="mod-t">Local Collision Avoidance <em>pedestrian-driver slot</em></span>
+                    <span class="subs pick" data-pick="driver">
+                      <button type="button" data-val="SFM" class="c-force">SFM</button>
+                      <button type="button" data-val="HSFM" class="c-force">HSFM</button>
+                      <button type="button" data-val="ORCA" class="c-velocity">ORCA</button>
+                      <button type="button" data-val="Straight" class="c-baseline">Straight</button>
+                      <button type="button" data-val="NSP" class="c-imitation">NSP</button>
+                      <button type="button" data-val="SocialGAIL" class="c-imitation">SocialGAIL</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
 
-            <div class="item p-4">
-              <h3 class="subtitle has-text-centered is-4">Scenario: BT Coverage</h3>
-              <div class="columns is-centered">
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Peds only/bt_coverage_hsfm.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>HSFM</strong></p>
+              <div class="flow" aria-hidden="true">
+                <span class="flow-arrow down" style="--fc: var(--l-ped)"><svg viewBox="0 0 12 24" aria-hidden="true"><path d="M6 2v18" class="fl-line" /><path d="M1.5 15.5 6 20.5l4.5-5" class="fl-head" /></svg>pedestrian states</span>
+                <span class="flow-arrow up" style="--fc: var(--l-env)"><svg viewBox="0 0 12 24" aria-hidden="true"><path d="M6 22V4" class="fl-line" /><path d="M1.5 8.5 6 3.5l4.5 5" class="fl-head" /></svg>synchronized world state</span>
+              </div>
+
+              <div class="layer l-env">
+                <div class="layer-name">Environment</div>
+                <div class="row-3">
+                  <div class="mod" data-id="evaluator">
+                    <span class="mod-t">Evaluator</span>
+                    <span class="subs"><span>Success rate</span><span>Collision rate</span><span>Smoothness</span><span>…</span></span>
+                  </div>
+                  <div class="mod" data-id="simulator">
+                    <span class="mod-t">Built-in Simulator</span>
+                    <span class="subs"><span>YAML scenarios</span><span>ROS 2</span><span>Gazebo</span><span>Isaac Sim</span><span>Unity</span></span>
+                  </div>
+                  <div class="mod mod-core" data-id="executor">
+                    <span class="mod-t">Deterministic Executor</span>
+                    <span class="subs"><span>Lockstep synchronization</span></span>
+                  </div>
                 </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Peds only/bt_coverage_orca.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>ORCA</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Peds only/bt_coverage_socialgail.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
+              </div>
+
+              <div class="flow" aria-hidden="true">
+                <span class="flow-arrow down" style="--fc: var(--l-env)"><svg viewBox="0 0 12 24" aria-hidden="true"><path d="M6 2v18" class="fl-line" /><path d="M1.5 15.5 6 20.5l4.5-5" class="fl-head" /></svg>observation</span>
+                <span class="flow-arrow up" style="--fc: var(--l-robot)"><svg viewBox="0 0 12 24" aria-hidden="true"><path d="M6 22V4" class="fl-line" /><path d="M1.5 8.5 6 3.5l4.5 5" class="fl-head" /></svg>pose &amp; twist</span>
+              </div>
+
+              <div class="layer l-robot">
+                <div class="layer-name">Robot policy</div>
+                <div class="row-3">
+                  <div class="mod" data-id="input">
+                    <span class="mod-t">Input State</span>
+                    <span class="subs"><span>Observation</span></span>
+                    <svg class="mod-art" viewBox="0 0 200 70" aria-hidden="true">
+                      <g class="rays">
+                        <path d="M40 35 118 12M40 35 150 30M40 35 124 58M40 35 182 44M40 35 96 4M40 35 90 66" />
+                      </g>
+                      <circle cx="118" cy="12" r="6" class="ped" />
+                      <circle cx="150" cy="30" r="6" class="ped" />
+                      <circle cx="124" cy="58" r="6" class="ped" />
+                      <circle cx="182" cy="44" r="6" class="ped" />
+                      <circle cx="40" cy="35" r="10" class="bot" />
+                      <path d="M40 35h10" class="bot-head" />
+                    </svg>
+                  </div>
+                  <div class="mod mod-slot" data-id="policy">
+                    <span class="mod-t">Kinematic Policy <em>robot-policy slot</em></span>
+                    <span class="subs pick" data-pick="policy">
+                      <button type="button" data-val="DRL-VO">DRL-VO</button>
+                      <button type="button" data-val="CADRL">CADRL</button>
+                      <button type="button" data-val="SARL">SARL</button>
+                      <button type="button" data-val="DS-RNN">DS-RNN</button>
+                    </span>
+                    <svg class="mod-art" viewBox="0 0 200 68" aria-hidden="true">
+                      <path d="M40 14L100 10 M40 14L100 26 M40 14L100 42 M40 14L100 58 M40 34L100 10 M40 34L100 26 M40 34L100 42 M40 34L100 58 M40 54L100 10 M40 54L100 26 M40 54L100 42 M40 54L100 58 M100 10L160 22 M100 10L160 46 M100 26L160 22 M100 26L160 46 M100 42L160 22 M100 42L160 46 M100 58L160 22 M100 58L160 46" class="nn-e" />
+                      <circle cx="40" cy="14" r="5" class="nn-n" style="animation-delay:0.00s" />
+                      <circle cx="40" cy="34" r="5" class="nn-n" style="animation-delay:0.08s" />
+                      <circle cx="40" cy="54" r="5" class="nn-n" style="animation-delay:0.16s" />
+                      <circle cx="100" cy="10" r="5" class="nn-n" style="animation-delay:0.25s" />
+                      <circle cx="100" cy="26" r="5" class="nn-n" style="animation-delay:0.33s" />
+                      <circle cx="100" cy="42" r="5" class="nn-n" style="animation-delay:0.41s" />
+                      <circle cx="100" cy="58" r="5" class="nn-n" style="animation-delay:0.49s" />
+                      <circle cx="160" cy="22" r="5" class="nn-n" style="animation-delay:0.50s" />
+                      <circle cx="160" cy="46" r="5" class="nn-n" style="animation-delay:0.58s" />
+                      <text x="14" y="38" class="a-s">obs</text>
+                      <text x="172" y="38" class="a-s">cmd</text>
+                    </svg>
+                  </div>
+                  <div class="mod" data-id="output">
+                    <span class="mod-t">Output State</span>
+                    <span class="subs"><span>Pose</span><span>Twist</span></span>
+                    <svg class="mod-art" viewBox="0 0 200 70" aria-hidden="true">
+                      <path d="M30 56C70 56 90 22 150 18" class="path-dash" />
+                      <g>
+                        <circle r="10" class="bot" />
+                        <path d="M0 0h10" class="bot-head" />
+                        <animateMotion dur="3.2s" repeatCount="indefinite" rotate="auto" path="M30 56C70 56 90 22 150 18" />
+                      </g>
+                      <path d="M150 18h26" class="vec" marker-end="url(#arrB)" />
+                      <text x="168" y="12" class="a-s">v</text>
+                      <path d="M140 34a12 12 0 0 0 20 4" class="vec" marker-end="url(#arrB)" />
+                      <text x="164" y="50" class="a-s">ω</text>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="item p-4">
-              <h3 class="subtitle has-text-centered is-4">Scenario: Escort</h3>
-              <div class="columns is-centered">
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Peds only/escort_hsfm.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>HSFM</strong></p>
+            <aside class="sysx-panel" aria-live="polite">
+              <div class="toy">
+                <canvas class="toy-canvas" aria-label="Toy crowd animation for the selected pedestrian driver"></canvas>
+                <div class="toy-cap">
+                  <span><i class="toy-dot" style="background: var(--c, var(--force))"></i><b class="toy-driver">HSFM</b> crowd</span>
+                  <span><i class="toy-dot" style="background: var(--accent)"></i>robot</span>
                 </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Peds only/escort_orca.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>ORCA</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Peds only/escort_socialgail.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
-                </div>
+                <p class="toy-note">Toy illustration of the driver class, not PEDS output.</p>
               </div>
-            </div>
+              <div class="panel-step"></div>
+              <div class="panel-layer"></div>
+              <h3 class="panel-title"></h3>
+              <p class="panel-desc"></p>
+              <div class="panel-extra"></div>
+              <ol class="cycle" aria-label="Executor cycle"></ol>
+            </aside>
+          </div>
+        </div>
 
-            <div class="item p-4">
-              <h3 class="subtitle has-text-centered is-4">Scenario: Queue</h3>
-              <div class="columns is-centered">
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Peds only/queue_hsfm.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>HSFM</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Peds only/queue_orca.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>ORCA</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Peds only/queue_socialgail.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
-                </div>
-              </div>
-            </div>
+        <p class="figcap sysx-cap">
+          <span class="fig-num">FIG. 2</span>
+          <strong>System overview.</strong>
+          The two pedestrian-driver slots, the deterministic executor cycle that advances drivers and the robot policy
+          in lockstep, and the boundary that separates pedestrian infrastructure (released as plug-ins) from robot
+          policy evaluation (kinematic evaluation harness).
+          <button type="button" class="linklike" data-open-fig="static/images/system.png">View the paper figure</button>
+        </p>
 
-            <div class="item p-4">
-              <h3 class="subtitle has-text-centered is-4">Scenario: Flow Coverage</h3>
-              <div class="columns is-centered">
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Peds only/flow_coverage_hsfm.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>HSFM</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Peds only/flow_coverage_orca.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>ORCA</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Peds only/flow_coverage_socialgail.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
-                </div>
-              </div>
+        <div class="features reveal mt-lg">
+          <div class="feature">
+            <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                <path d="M14 17.5h7M17.5 14v7" />
+              </svg></div>
+            <div>
+              <h3>Pluggable drivers</h3>
+              <p>Pedestrian-driver slots accept force-based, velocity-obstacle, baseline, and learned models as
+                plug-ins behind one interface.</p>
             </div>
           </div>
-          <div class="content is-size-5">
-            <p>
-              The videos below illustrate how the same scenario evolves when
-              only the pedestrian driver changes.
-              Although each crowd pursues identical navigation goals,
-              their local interactions, collision avoidance strategies,
-              and collective motion differ noticeably across driver classes.
-            </p>
+          <div class="feature">
+            <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 2" />
+              </svg></div>
+            <div>
+              <h3>Deterministic executor</h3>
+              <p>Drivers and the robot policy advance in lockstep. At a fixed seed, substituting the driver is the
+                only source of trial-to-trial variation.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3 3 8l9 5 9-5-9-5z" />
+                <path d="m3 13 9 5 9-5" />
+              </svg></div>
+            <div>
+              <h3>Simulator-agnostic</h3>
+              <p>A built-in kinematic harness for evaluation, plus YAML-defined scenarios that run in RViz2, Gazebo,
+                and Isaac Sim through ROS 2.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 20V10M10 20V4M16 20v-7M22 20H2" />
+              </svg></div>
+            <div>
+              <h3>Built-in evaluator</h3>
+              <p>Success rate, collision rate, smoothness and more, computed identically for every driver and
+                policy pair.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="hero is-small">
-      <div class="hero-body">
-        <div class="container is-centered">
-          <h2 class="title is-3 pt-6">Robot Policies Benchmark</h2>
-          <div class="content has-text-justified">
-            <p class="mb-5 is-size-5">
-              Unlike traditional benchmarks, PEDS evaluates every robot policy across
-              multiple pedestrian drivers rather than a single crowd model.
-              This protocol reveals whether a navigation policy remains reliable under
-              different assumptions about human behavior.
-            </p>
+    <!-- ============================== DRIVERS ============================== -->
+    <section class="section" id="drivers">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="num">04 / Pedestrian drivers</p>
+          <h2>Same scenario, same goals, different crowd models</h2>
+          <p class="section-intro">
+            Six reference drivers span classical and learned modeling paradigms. Every driver runs the same scenario
+            description from identical initial conditions, so differences in crowd behavior come from the pedestrian
+            model alone.
+          </p>
+        </div>
+
+        <div class="taxonomy reveal">
+          <div class="driver c-force">
+            <div class="klass">Force-based</div>
+            <h3>Social forces</h3>
+            <div class="chips"><span class="chip">SFM</span><span class="chip">HSFM</span></div>
           </div>
-
-          <div id="robot-policies-carousel" class="carousel results-carousel">
-
-            <div class="item p-4">
-              <h3 class="subtitle has-text-centered is-4">Scenario: BT Coverage (CADRL)</h3>
-              <div class="columns is-centered">
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Robots/robot_bt_coverage_hsfm_cadrl.mp4"
-                      type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>HSFM</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Robots/robot_bt_coverage_orca_cadrl.mp4"
-                      type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>ORCA</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Robots/robot_bt_coverage_socialgail_cadrl.mp4"
-                      type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
-                </div>
-              </div>
-            </div>
-
-            <div class="item p-4">
-              <h3 class="subtitle has-text-centered is-4">Scenario: Escort (CADRL)</h3>
-              <div class="columns is-centered">
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Robots/robot_escort_hsfm_cadrl.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>HSFM</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Robots/robot_escort_orca_cadrl.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>ORCA</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Robots/robot_escort_socialgail_cadrl.mp4"
-                      type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
-                </div>
-              </div>
-            </div>
-
-            <div class="item p-4">
-              <h3 class="subtitle has-text-centered is-4">Scenario: L-Corridor (CADRL)</h3>
-              <div class="columns is-centered">
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Robots/robot_l_corridor_hsfm_cadrl.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>HSFM</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Robots/robot_l_corridor_orca_cadrl.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>ORCA</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Robots/robot_l_corridor_socialgail_cadrl.mp4"
-                      type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
-                </div>
-              </div>
-            </div>
-
-            <div class="item p-4">
-              <h3 class="subtitle has-text-centered is-4">Scenario: Simple Crossing (CADRL)</h3>
-              <div class="columns is-centered">
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Robots/robot_simple_crossing_hsfm_cadrl.mp4"
-                      type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>HSFM</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Robots/robot_simple_crossing_orca_cadrl.mp4"
-                      type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>ORCA</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/Native recorder/Robots/robot_simple_crossing_socialgail_cadrl.mp4"
-                      type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>SocialGAIL</strong></p>
-                </div>
-              </div>
-            </div>
+          <div class="driver c-velocity">
+            <div class="klass">Velocity-obstacle</div>
+            <h3>Reciprocal avoidance</h3>
+            <div class="chips"><span class="chip">ORCA</span></div>
           </div>
-
-          <div class="content has-text-justified">
-            <p class="mb-5 is-size-5">
-              In many scenarios, the same robot exhibits noticeably different success
-              rates, collision statistics, and social compliance depending solely on
-              the pedestrian driver generating the surrounding crowd.
-            </p>
+          <div class="driver c-baseline">
+            <div class="klass">Baseline</div>
+            <h3>No avoidance</h3>
+            <div class="chips"><span class="chip">Straight</span></div>
+          </div>
+          <div class="driver c-imitation">
+            <div class="klass">Imitation learning</div>
+            <h3>Learned from data</h3>
+            <div class="chips"><span class="chip">NSP</span><span class="chip">SocialGAIL</span></div>
           </div>
         </div>
+
+        <div class="viewer plots mt-lg reveal" data-viewer="drivers"></div>
+        <p class="callout reveal">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 8v5M12 16.5v.5" />
+          </svg>
+          <span>Although each crowd pursues identical navigation goals, local interactions, collision-avoidance
+            strategies, and collective motion differ noticeably across driver classes.</span>
+        </p>
       </div>
     </section>
 
-    <section class="hero is-small is-light">
-      <div class="hero-body">
-        <div class="container">
-          <h2 class="title is-3 pt-6">Compatibility with External Simulators</h2>
-          <div id="robot-policies-carousel" class="carousel results-carousel">
+    <!-- ============================== BENCHMARK ============================== -->
+    <section class="section section-tint" id="benchmark">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="num">05 / Robot policy benchmark</p>
+          <h2>One robot, three crowds, three outcomes</h2>
+          <p class="section-intro">
+            PEDS evaluates every robot policy against multiple pedestrian drivers rather than a single crowd model,
+            revealing whether a policy stays reliable under different assumptions about human behavior. Below, the
+            same CADRL policy navigates each scenario under three drivers.
+          </p>
+        </div>
+        <div class="viewer plots reveal" data-viewer="robots"></div>
+        <p class="callout reveal">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 8v5M12 16.5v.5" />
+          </svg>
+          <span>In many scenarios the same robot shows noticeably different success rates, collision statistics, and
+            social compliance, depending solely on the pedestrian driver generating the surrounding crowd.</span>
+        </p>
+      </div>
+    </section>
 
-            <div class="item p-4">
-              <h3 class="subtitle has-text-centered is-4"></h3>
-              <div class="columns is-centered">
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/rviz_queue_and_group_conv.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>RViz2</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/gazebo_queue_and_group_conv.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>Gazebo</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/isaac_queue_and_group_conv.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>IsaacSim</strong></p>
-                </div>
-              </div>
-            </div>
-
-            <div class="item p-4">
-              <h3 class="subtitle has-text-centered is-4"></h3>
-              <div class="columns is-centered">
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/rviz_airport.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>RViz2</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/gazebo_airport.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>Gazebo</strong></p>
-                </div>
-                <div class="column">
-                  <video preload="none" autoplay controls muted loop>
-                    <source src="static/videos/isaac_airport.mp4" type="video/mp4">
-                  </video>
-                  <p class="has-text-centered"><strong>IsaacSim</strong></p>
-                </div>
-              </div>
-            </div>
+    <!-- ============================== SIMULATORS ============================== -->
+    <section class="section" id="simulators">
+      <div class="wrap">
+        <div class="section-head stacked full reveal">
+          <p class="num">06 / Integrations</p>
+          <h2>Compatible with external simulators</h2>
+          <div class="section-intro intro-row">
+            <p>PEDS speaks ROS 2, so the same scenario runs in the built-in simulator or streams into external 3D
+              simulators. Pick a scenario, then a simulator to bring it on stage.</p>
+            <ul class="logos" aria-label="Compatible with">
+              <li><img src="static/images/logos/ros2.png" alt="ROS 2" class="wide"></li>
+              <li><img src="static/images/logos/gazebo.png" alt="Gazebo"></li>
+              <li><img src="static/images/logos/isaac.png" alt="NVIDIA Isaac Sim"></li>
+              <li><img src="static/images/logos/unity.png" alt="Unity"></li>
+            </ul>
           </div>
+        </div>
+        <div class="viewer reveal" data-viewer="sims"></div>
+      </div>
+    </section>
+
+    <!-- ============================== CITATION ============================== -->
+    <section class="section section-tint" id="citation">
+      <div class="wrap wrap-narrow reveal">
+        <div class="section-head" style="display: block; margin-bottom: 24px;">
+          <p class="num" style="margin-bottom: 18px;">07 / Citation</p>
+          <h2>BibTeX</h2>
+        </div>
+        <!-- TODO: fill in authors -->
+        <div class="bib">
+          <button class="copy-btn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="9" y="9" width="12" height="12" rx="2" />
+              <path d="M5 15V5a2 2 0 0 1 2-2h10" />
+            </svg><span>Copy</span></button>
+          <pre>@article{peds2026,
+  title   = {PEDS: Closed-Loop Benchmarking of Social Navigation
+             across Pedestrian Behavior Models},
+  author  = {Author, First and Author, Second},
+  journal = {IEEE Robotics and Automation Letters},
+  year    = {2026}
+}</pre>
         </div>
       </div>
     </section>
-    <!--BibTex citation -->
-    <!-- <section class="section" id="BibTeX">
-      <div class="container is-max-desktop content">
-        <div class="bibtex-header">
-          <h2 class="title">BibTeX</h2>
-          <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
-            <i class="fas fa-copy"></i>
-            <span class="copy-text">Copy</span>
-          </button>
-        </div>
-        <pre id="bibtex-code"><code>@article{YourPaperKey2024,
-  title={Your Paper Title Here},
-  author={First Author and Second Author and Third Author},
-  journal={Conference/Journal Name},
-  year={2024},
-  url={https://your-domain.com/your-project-page}
-}</code></pre>
-      </div>
-    </section> -->
-    <!--End BibTex citation -->
+  </main>
 
-    <footer class="footer">
-      <div class="container">
-        <div class="columns is-centered">
-          <div class="column is-8">
-            <div class="content">
+  <footer>
+    <div class="wrap">
+      <span>Dataset: CC BY 4.0 · Code: Apache 2.0</span>
+      <span>Page adapted from <a href="https://nerfies.github.io" rel="noopener">Nerfies</a>.</span>
+    </div>
+  </footer>
 
-              <p>
-                This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
-                  target="_blank">Academic Project Page Template</a> which was adopted from the <a
-                  href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-                You are free to borrow the source code of this website, we just ask that you link back to this page in
-                the footer. <br> This website is licensed under a <a rel="license"
-                  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-                  Commons Attribution-ShareAlike 4.0 International License</a>.
-              </p>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Statcounter tracking code -->
-
-    <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
-
-    <!-- End of Statcounter Code -->
-
+  <div class="lightbox" role="dialog" aria-label="Enlarged figure"><img alt=""></div>
 </body>
-<script>
-
-</script>
 
 </html>
