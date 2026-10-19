@@ -25,11 +25,11 @@
   <link
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/style.css?v=2026-10-19c">
   <script>
     try { const t = localStorage.getItem('peds-theme'); if (t) document.documentElement.dataset.theme = t; } catch (_) { }
   </script>
-  <script defer src="static/js/main.js"></script>
+  <script defer src="static/js/main.js?v=2026-10-19c"></script>
 </head>
 
 <body>
@@ -208,11 +208,61 @@
             they were tested against different crowd dynamics.
           </p>
         </div>
-        <div class="video-frame reveal">
-          <!-- src is set by main.js when scrolled into view so the muted autoplay starts where the reader is -->
-          <iframe data-src="https://www.youtube-nocookie.com/embed/o8aDuvsscKU?autoplay=1&mute=1&loop=1&playlist=o8aDuvsscKU&playsinline=1&rel=0"
-            title="PEDS overview video" allow="autoplay; encrypted-media; picture-in-picture"
-            allowfullscreen></iframe>
+        <!-- Highlight reel cut from the full video. The "Full video" tab (or a chapter's time link) swaps in YouTube in place. -->
+        <div class="viewer demo reveal" data-demo data-yt="o8aDuvsscKU">
+          <div class="viewer-head">
+            <div class="seg" role="tablist" aria-label="Demo mode">
+              <button class="on" type="button" role="tab" aria-selected="true" data-mode="clips"><svg class="tab-ico"
+                  viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 10h16M8 6l-2 4M13 6l-2 4M18 6l-2 4" /></svg>Highlights</button>
+              <button type="button" role="tab" aria-selected="false" data-mode="full"><svg class="tab-ico"
+                  viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M10 8.5v7l5.5-3.5z" /></svg>Full video
+                <span class="dm-dur">1:54</span></button>
+            </div>
+            <div class="ctrls">
+              <button class="icon-btn" type="button" data-dm-play title="Pause" aria-label="Pause"></button>
+              <button class="icon-btn" type="button" data-dm-restart title="Restart reel" aria-label="Restart reel"></button>
+            </div>
+          </div>
+          <div class="sc-body dm-body">
+            <div class="sc-stage dm-stage">
+              <video class="dm-video" muted playsinline preload="metadata" poster="static/videos/demo/platforms.jpg"
+                src="static/videos/demo/platforms.mp4" aria-label="Demo highlight"></video>
+              <i class="dm-bar"><i></i></i>
+            </div>
+            <div class="dm-rail" role="list">
+            <button class="dm-chap on" type="button" aria-pressed="true" data-clip="platforms" data-start="70"
+              data-title="Any simulator" data-caption="The same scenario runs in RViz, Gazebo and Isaac Sim at once, so results stay comparable across physics engines.">
+              <span class="dm-thumb"><img src="static/videos/demo/thumb_platforms.jpg" alt="" loading="lazy"><i class="dm-prog"></i></span>
+              <span class="dm-meta"><small><b>01</b>1:10</small><strong>Any simulator</strong><em>One scenario, RViz · Gazebo · Isaac Sim</em></span>
+            </button>
+            <button class="dm-chap" type="button" aria-pressed="false" data-clip="groups" data-start="88"
+              data-title="Groups &amp; queues" data-caption="Behavior trees let pedestrians form groups, queue and follow each other, not just walk to goals.">
+              <span class="dm-thumb"><img src="static/videos/demo/thumb_groups.jpg" alt="" loading="lazy"><i class="dm-prog"></i></span>
+              <span class="dm-meta"><small><b>02</b>1:28</small><strong>Groups &amp; queues</strong><em>Need-driven behavior trees</em></span>
+            </button>
+            <button class="dm-chap" type="button" aria-pressed="false" data-clip="robot" data-start="102"
+              data-title="Robot in the crowd" data-caption="The robot drives to its goal through groups of pedestrians that keep forming and breaking up.">
+              <span class="dm-thumb"><img src="static/videos/demo/thumb_robot.jpg" alt="" loading="lazy"><i class="dm-prog"></i></span>
+              <span class="dm-meta"><small><b>03</b>1:42</small><strong>Robot in the crowd</strong><em>Real-time closed-loop run</em></span>
+            </button>
+            <button class="dm-chap" type="button" aria-pressed="false" data-clip="drivers" data-start="12"
+              data-title="Swap the driver" data-caption="Only the pedestrian driver changes (SocialGAIL, ORCA, HSFM), and crowd flow changes with it.">
+              <span class="dm-thumb"><img src="static/videos/demo/thumb_drivers.jpg" alt="" loading="lazy"><i class="dm-prog"></i></span>
+              <span class="dm-meta"><small><b>04</b>0:12</small><strong>Swap the driver</strong><em>Same scenario, three crowd models</em></span>
+            </button>
+            <button class="dm-chap" type="button" aria-pressed="false" data-clip="cadrl" data-start="27"
+              data-title="Same robot, different crowd" data-caption="One robot policy (red) takes different paths depending on which driver moves the crowd.">
+              <span class="dm-thumb"><img src="static/videos/demo/thumb_cadrl.jpg" alt="" loading="lazy"><i class="dm-prog"></i></span>
+              <span class="dm-meta"><small><b>05</b>0:27</small><strong>Same robot, different crowd</strong><em>CADRL under each driver</em></span>
+            </button>
+            </div>
+          </div>
+          <div class="dm-cap">
+            <p class="figcap"><span class="fig-num">CLIP <span data-dm-idx>01</span> / 05</span><strong data-dm-title>Any simulator.</strong>
+              <span data-dm-text>The same scenario runs in RViz, Gazebo and Isaac Sim at once, so results stay comparable across physics engines.</span></p>
+            <button class="dm-jump" type="button" data-dm-jump><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+              <span data-dm-jump-label>Watch in full video from</span> <b data-dm-time>1:10</b></button>
+          </div>
         </div>
       </div>
     </section>

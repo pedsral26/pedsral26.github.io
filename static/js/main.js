@@ -278,16 +278,106 @@
     }).observe(heroVideo);
   }
 
-  // Muted autoplay for the overview video, started only once it scrolls into view.
-  const yt = document.querySelector('.video-frame iframe[data-src]');
-  if (yt) {
-    const ytObs = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
-      yt.src = yt.dataset.src;
-      ytObs.disconnect();
-    }, { threshold: 0.35 });
-    ytObs.observe(yt);
-  }
+  // Demo: a highlight reel cut from the full video. Clips auto-advance; the "Full video" tab,
+  // the jump button, or a chapter click in full mode puts the YouTube video on the same stage.
+  document.querySelectorAll('[data-demo]').forEach((demo) => {
+    const stage = demo.querySelector('.dm-stage');
+    const video = stage.querySelector('video');
+    const bar = stage.querySelector('.dm-bar');
+    const chaps = [...demo.querySelectorAll('.dm-chap')];
+    const tabs = [...demo.querySelectorAll('[data-mode]')];
+    const playBtn = demo.querySelector('[data-dm-play]');
+    const restartBtn = demo.querySelector('[data-dm-restart]');
+    const jump = demo.querySelector('[data-dm-jump]');
+    const $ = (k) => demo.querySelector(`[data-dm-${k}]`);
+    const fmt = (t) => `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`;
+    let idx = 0, paused = false, visible = false, iframe = null, raf = 0;
+
+    const play = () => { if (!paused && visible && !iframe) video.play().catch(() => {}); };
+    const setProgress = (p) => {
+      bar.style.setProperty('--p', p);
+      chaps[idx].style.setProperty('--p', p);
+    };
+    const tick = () => {
+      if (video.duration) setProgress(video.currentTime / video.duration);
+      raf = video.paused ? 0 : requestAnimationFrame(tick);
+    };
+    video.addEventListener('play', () => { if (!raf) raf = requestAnimationFrame(tick); });
+    video.addEventListener('ended', () => select((idx + 1) % chaps.length));
+
+    function markChaps(on) {
+      chaps.forEach((c, i) => { c.classList.toggle('on', i === on); c.setAttribute('aria-pressed', i === on); });
+    }
+    function setMode(full) {
+      demo.classList.toggle('is-full', full);
+      tabs.forEach((t) => { const on = (t.dataset.mode === 'full') === full; t.classList.toggle('on', on); t.setAttribute('aria-selected', on); });
+      $('jump-label').textContent = full ? 'Back to highlights' : 'Watch in full video from';
+      $('time').hidden = full;
+    }
+    function caption(i) {
+      const c = chaps[i];
+      $('idx').textContent = String(i + 1).padStart(2, '0');
+      $('title').textContent = `${c.dataset.title}.`;
+      $('text').textContent = c.dataset.caption;
+      $('time').textContent = fmt(Number(c.dataset.start));
+    }
+    function select(i) {
+      closeFull();
+      idx = i;
+      markChaps(i);
+      caption(i);
+      chaps.forEach((c) => c.style.setProperty('--p', 0));
+      const key = chaps[i].dataset.clip;
+      video.poster = `static/videos/demo/${key}.jpg`;
+      video.src = `static/videos/demo/${key}.mp4`;
+      setProgress(0);
+      play();
+    }
+    function openFull(at, chapter) {
+      video.pause();
+      if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.title = 'PEDS demo video';
+        iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        iframe.allowFullscreen = true;
+        stage.append(iframe);
+      }
+      iframe.src = `https://www.youtube-nocookie.com/embed/${demo.dataset.yt}?autoplay=1&start=${at}&playsinline=1&rel=0&modestbranding=1`;
+      setMode(true);
+      markChaps(chapter);
+      if (chapter >= 0) { idx = chapter; caption(chapter); }
+      $('title').textContent = 'Full video, with sound.';
+      $('text').textContent = chapter >= 0
+        ? `Playing from ${fmt(at)}: ${chaps[chapter].dataset.title}. Pick another chapter to jump there.`
+        : 'Playing from the start. Pick a chapter on the right to jump to it.';
+    }
+    function closeFull() {
+      if (!iframe) return;
+      iframe.remove();
+      iframe = null;
+      setMode(false);
+    }
+
+    chaps.forEach((c, i) => c.addEventListener('click', () => (iframe ? openFull(Number(c.dataset.start), i) : select(i))));
+    tabs.forEach((t) => t.addEventListener('click', () => {
+      if (t.dataset.mode === 'full') { if (!iframe) openFull(0, -1); } else if (iframe) select(idx);
+    }));
+    jump.addEventListener('click', () => (iframe ? select(idx) : openFull(Number(chaps[idx].dataset.start), idx)));
+
+    const setPlayIcon = () => {
+      playBtn.innerHTML = paused ? ICON_PLAY : ICON_PAUSE;
+      playBtn.title = playBtn.ariaLabel = paused ? 'Play' : 'Pause';
+    };
+    playBtn.addEventListener('click', () => { paused = !paused; setPlayIcon(); if (paused) video.pause(); else play(); });
+    restartBtn.innerHTML = ICON_RESTART;
+    restartBtn.addEventListener('click', () => { paused = false; setPlayIcon(); select(0); });
+    setPlayIcon();
+
+    new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      if (visible) play(); else video.pause();
+    }, { threshold: 0.25 }).observe(stage);
+  });
 
   // Nav is transparent over the hero video and turns solid below it; highlight the current section.
   const nav = document.querySelector('.topnav');
