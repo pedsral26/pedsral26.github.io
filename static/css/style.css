@@ -216,19 +216,46 @@ button { font: inherit; color: inherit; cursor: pointer; }
     linear-gradient(120deg, rgba(45, 212, 191, .14), rgba(161, 139, 255, .1));
 }
 .hero-inner { width: 100%; padding-top: 140px; padding-bottom: 88px; }
-.badge {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 5px 6px 5px 14px;
-  border: 1px solid rgba(255, 255, 255, .22); border-radius: 10px;
-  background: rgba(255, 255, 255, .07);
-  backdrop-filter: blur(8px);
-  font-size: 13px; font-weight: 500; color: rgba(255, 255, 255, .85);
+/* venue badge: accepted journal + upcoming conference */
+.venue {
+  display: inline-flex; flex-wrap: wrap; align-items: stretch;
+  padding: 4px; border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  background: rgba(8, 16, 17, .38);
+  backdrop-filter: blur(10px);
+  font-size: 13px; font-weight: 500; color: rgba(255, 255, 255, .82);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, .5);
   margin-bottom: 26px;
 }
-.badge b {
-  font-family: var(--mono); font-weight: 500; font-size: 12px;
-  padding: 2px 8px; border-radius: 6px;
-  background: #2dd4bf; color: #062420;
+.venue-item { display: inline-flex; align-items: center; gap: 9px; padding: 4px 10px; border-radius: 8px; }
+.venue-item + .venue-item { border-left: 1px solid rgba(255, 255, 255, .14); margin-left: 4px; padding-left: 14px; }
+.venue-check {
+  width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center;
+  background: #2dd4bf; box-shadow: 0 0 0 4px rgba(45, 212, 191, .18);
+}
+.venue-check svg { width: 12px; height: 12px; fill: none; stroke: #062420; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.venue b {
+  font-family: var(--mono); font-weight: 500; font-size: 12px; letter-spacing: .02em;
+  padding: 3px 8px; border-radius: 6px; background: #2dd4bf; color: #062420;
+}
+.venue b.venue-next {
+  position: relative; color: #fff; background: transparent; overflow: hidden; isolation: isolate;
+  border: 1px solid transparent;
+  background: linear-gradient(rgba(14, 22, 28, .9), rgba(14, 22, 28, .9)) padding-box,
+              linear-gradient(90deg, #2dd4bf, #a18bff) border-box;
+}
+.venue b.venue-next::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(100deg, transparent 30%, rgba(161, 139, 255, .45) 50%, transparent 70%);
+  transform: translateX(-100%); animation: venue-shine 4.5s ease-in-out 1.2s infinite;
+}
+@keyframes venue-shine { 0%, 55% { transform: translateX(-100%); } 85%, 100% { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) { .venue b.venue-next::after { animation: none; } }
+@media (max-width: 520px) {
+  .venue { flex-direction: column; align-items: flex-start; }
+  .venue-item + .venue-item { border-left: 0; margin-left: 0; padding-left: 10px; border-top: 1px solid rgba(255, 255, 255, .12); }
+  .venue-item { width: 100%; }
+  .venue-item + .venue-item { padding-left: 37px; }
 }
 .hero h1 {
   font-size: clamp(32px, 5vw, 62px);

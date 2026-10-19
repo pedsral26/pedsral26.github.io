@@ -25,11 +25,11 @@
   <link
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="static/css/style.css?v=2026-10-19c">
+  <link rel="stylesheet" href="static/css/style.css?v=2026-10-19d">
   <script>
     try { const t = localStorage.getItem('peds-theme'); if (t) document.documentElement.dataset.theme = t; } catch (_) { }
   </script>
-  <script defer src="static/js/main.js?v=2026-10-19c"></script>
+  <script defer src="static/js/main.js?v=2026-10-19d"></script>
 </head>
 
 <body>
@@ -73,25 +73,30 @@
     </video>
     <div class="hero-shade"></div>
     <div class="wrap hero-inner">
-      <p class="badge">Accepted to <b>IEEE RA-L 2026</b></p>
+      <p class="venue">
+        <span class="venue-item"><i class="venue-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg></i>Accepted to <b>IEEE RA-L 2026</b></span>
+        <span class="venue-item">To be presented at <b class="venue-next">ICRA 2027</b></span>
+      </p>
       <h1><span class="name">PEDS</span>: Closed-Loop Benchmarking of Social Navigation across Pedestrian Behavior
         Models</h1>
       <p class="authors">
         <span>Duc Tai Nguyen<sup>1</sup></span>
-        <span>Volodymyr Shcherbyna<sup>1</sup></span>
+        <span>Volodymyr Shcherbyna<sup>1,2</sup></span>
         <span>Anh Do Duc<sup>1</sup></span>
-        <span>Zhengcheng Shen<sup>2</sup></span>
+        <span>Zhengcheng Shen<sup>3</sup></span>
         <span>Linh Kästner<sup>1</sup></span>
       </p>
       <p class="affil">
         <span><sup>1</sup>Singapore Management University, Singapore</span>
-        <span><sup>2</sup>Max Planck Institute for Plasma Physics, Germany</span>
+        <span><sup>2</sup>Technical University of Berlin, Germany</span>
+        <span><sup>3</sup>Max Planck Institute for Plasma Physics, Germany</span>
       </p>
       <nav class="hero-links" aria-label="Paper links">
-        <!-- TODO: add the paper link once it is public
-        <a class="btn primary" href="https://arxiv.org/abs/XXXX.XXXXX" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z M14 3v5h5" /></svg>Paper</a>
-        -->
-        <a class="btn primary" href="https://anonymous.4open.science/r/peds-review-9EDB" rel="noopener"><svg
+        <a class="btn primary" href="static/pdfs/PEDS_RAL2026.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"
+            aria-hidden="true">
+            <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h4" />
+          </svg>Paper</a>
+        <a class="btn" href="https://anonymous.4open.science/r/peds-review-9EDB" rel="noopener"><svg
             viewBox="0 0 24 24" aria-hidden="true">
             <path d="m9 18-6-6 6-6M15 6l6 6-6 6" />
           </svg>Code</a>
@@ -126,12 +131,12 @@
             <div class="stat-label">scenarios on a load × density grid, crossed with 4 robot policies</div>
           </div>
           <div class="stat">
-            <div class="stat-value hl">18<small>pp</small></div>
-            <div class="stat-label">swing in within-policy success rate, from the driver alone</div>
+            <div class="stat-value hl">14<small>pp</small></div>
+            <div class="stat-label">swing in within-policy success rate from the driver alone (up to 30 pp on dense scenarios)</div>
           </div>
           <div class="stat">
-            <div class="stat-value">&gt;2<small>×</small></div>
-            <div class="stat-label">peak cross-class trajectory divergence (1.4× on average)</div>
+            <div class="stat-value">&gt;3<small>×</small></div>
+            <div class="stat-label">peak cross-class trajectory divergence on dense scenarios (1.5× on average)</div>
           </div>
         </div>
 
@@ -178,9 +183,12 @@
               The release comprises <strong>six pedestrian drivers across four model classes</strong>: force-based
               (SFM, HSFM), velocity-based (ORCA), a no-avoidance baseline (Straight), and imitation-learned (NSP,
               SocialGAIL). The accompanying dataset spans 20 pedestrian-driver scenarios on a load × density grid,
-              crossed with four robot policies in closed loop. Within-policy success varies by <strong>up to 18
-                percentage points</strong> across pedestrian drivers, and cross-class trajectory divergence averages
-              1.4× and peaks above 2× on dense locomotion. We release the dataset under CC BY 4.0 and the code under
+              crossed with four robot policies in closed loop. Within-policy success varies by <strong>up to 14
+                percentage points</strong> across pedestrian drivers overall, and <strong>up to 30 percentage
+                points</strong> in dense navigation scenarios. Cross-class trajectory divergence averages 1.5× in
+              general and peaks above 3× on dense scenarios. On pure-navigation scenarios, a change of seed moves
+              trajectories more than a change of driver (ratio 0.75); on behavior-tree scenarios the driver effect is
+              the larger one (1.43). We release the dataset under CC BY 4.0 and the code under
               the Apache 2.0 License.
             </p>
           </div>
